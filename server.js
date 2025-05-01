@@ -5,15 +5,13 @@ const bodyParser = require('body-parser');
 const { createClient } = require('@supabase/supabase-js');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = 3000;
 
+// Initialize Supabase client
 const supabase = createClient(
   process.env.SUPABASE_URL, 
   process.env.SUPABASE_KEY
 );
-
-// Initialize Supabase client
-
 // Middleware
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
