@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -7,8 +8,10 @@ const app = express();
 const port = 3000;
 
 // Initialize Supabase client
-const supabase = createClient('https://cwelmbwlnaxlfajpymhg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN3ZWxtYndsbmF4bGZhanB5bWhnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYwNzkwOTcsImV4cCI6MjA2MTY1NTA5N30.45sEihK7rNCEVc3OG7-Xz1WNyk9rooRKrzzqP--Diro');
-
+const supabase = createClient(
+  process.env.SUPABASE_URL, 
+  process.env.SUPABASE_KEY
+);
 // Middleware
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
