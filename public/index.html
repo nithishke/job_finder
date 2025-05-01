@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Job Portal</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+  <link rel="icon" href="assessts/Frame 54.png">
+  <link href="https://fonts.googleapis.com/css2?family=Setoshi:opsz,wght@8..144,400;8..144,600&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+  <!-- Centered, Fully-Rounded Navbar -->
+  <div class="top">
+    <nav class="navbar">
+      <div class="logo">
+        <img src="/assessts/Frame 54.png" alt="Logo" />
+      </div>
+      <ul class="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="find-jobs.html">Find Jobs</a></li>
+        <li><a href="find-talents.html">Find Talents</a></li>
+        <li><a href="about-us.html">About us</a></li>
+        <li><a href="testimonials.html">Testimonials</a></li>
+        <li><a href="create-jobs.html" class="create-job">Create Jobs</a></li>
+      </ul>
+    </nav>
+  
+    <!-- Stretched Filter/Search Block -->
+    <section class="filters">
+      <div class="search-box">
+        <img style="color: black; height: 15px; margin-top: 10px;
+        width: 15px;" src="assessts/Vector (1).png" alt=""><input style="margin-left: 10px;" type="text" placeholder="By Job Title, Role" />
+      </div>
+      <div class="dropdown">
+        <img style="color: black; width: 15px; height: 18px; margin-top:5px; " src="assessts/Location.png" alt="">
+        <select>
+          <option style="color: #808080;" value="">Preferred Location </button></option>
+          <option value="bangalore">Bangalore</option>
+          <option value="delhi">Delhi</option>
+          <option value="remote">Remote</option>
+        </select>
+      </div>
+      <div class="dropdown">
+        <img style="color: black; width: 15px; height: 18px; margin-top: 5px;" src="assessts/JobTitle.png" alt="">
+        <select>
+          <option value="">Job Type </option>
+          <option value="full-time">Full Time </option>
+          <option value="part-time">Part Time</option>
+          <option value="internship">Internship</option>
+        </select>
+      </div>
+      <div class="slider">
+          <label for="salary">Salary Per Month <span id="salary-output">₹50k - ₹70k</span></label>
+          
+          <div class="range-wrapper">
+            <input type="range" id="min-salary" min="50000" max="150000" step="1000" value="50000" />
+            <input type="range" id="max-salary" min="50000" max="150000" step="1000" value="70000" />
+          </div>
+         
+        </div>
+  </div>
+      
+  </section>
+   <!-- Modal Background -->
+<!-- Modal Background -->
+<div class="modal-overlay" id="modalOverlay">
+  <!-- Modal Content -->
+  <div class="modal-content">
+    <h2>Create Job Opening</h2>
+    <form id="jobForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="jobTitle" >Job Title</label>
+          <input id="jobTitle" class="jobTitle" name="job_title" type="text" placeholder="Job Title" required />
+        </div>
+        <div class="form-group">
+          <label for="companyName">Company Name</label>
+          <input id="companyName" type="text" name="company_name" placeholder="Company Name" required />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="jobLocation">Preferred Location</label>
+          <select id="jobLocation" name="Location" required>
+            <option value="" >Choose Preferred Location</option>
+            <option value="bangalore">Bangalore</option>
+            <option value="delhi">Delhi</option>
+            <option value="remote">Remote</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="jobType">Job Type</label>
+          <select id="jobType" name="job_type" required>
+            <option value="full-time">Full Time</option>
+            <option value="part-time">Part Time</option>
+            <option value="internship">Internship</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="minSalary">Min Salary (Annual)</label>
+          <input id="minSalary" name="min_salary" type="text" placeholder="₹0" required />
+        </div>
+        <div class="form-group">
+          <label for="maxSalary">Max Salary (Annual)</label>
+          <input id="maxSalary" name="max_salary" type="text" placeholder="₹12,00,000" required />
+        </div>
+        <div class="form-group">
+          <label for="deadline">Application Deadline</label>
+          <input id="deadline" name="deadline" type="date" required />
+        </div>
+      </div>
+
+      <div class="form-group full-width">
+        <label for="jobDescription">Job Description</label>
+        <textarea id="jobDescription" name="description" placeholder="Please share a description to let the candidate know more about the job role" required></textarea>
+      </div>
+      <p class="submission_alert"></p>
+      <div class="form-actions">
+        <button type="button">Save Draft ⏷</button>
+        <button type="submit" class="publish-btn">Publish »</button>
+        
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- Add this to your main HTML file where you want to display jobs -->
+<section class="jobs-section">
+  
+  <div id="jobsContainer" class="jobs-container">
+    <!-- Jobs will be loaded here -->
+    <div class="loading-indicator">Loading jobs...</div>
+  </div>
+</section>
+
+
+  
+  
+  <script src="script.js"></script>
+  
+</body>
+</html>
