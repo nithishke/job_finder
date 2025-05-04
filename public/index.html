@@ -57,8 +57,8 @@
           <label for="salary">Salary Per Month <span id="salary-output">₹50k - ₹70k</span></label>
           
           <div class="range-wrapper">
-            <input type="range" id="min-salary" min="50000" max="150000" step="1000" value="50000" />
-            <input type="range" id="max-salary" min="50000" max="150000" step="1000" value="70000" />
+            <input type="range" id="min-salary" min="50000" onchange="updateSalaryOutput()" max="150000" step="1000" value="50000" />
+            <input type="range" id="max-salary" min="50000" onchange="updateSalaryOutput()" max="150000" step="1000" value="70000" />
           </div>
          
         </div>

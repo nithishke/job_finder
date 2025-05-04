@@ -102,13 +102,13 @@ body {
     min-width: 300px;
     border: none;
     width: fit-content;
-   border-right: solid 2px #808080;
+   border-right: solid 2px #bababa;
   }
   .search-box{
     display: flex;
     flex-direction: row;
     height: fit-content;
-    border-right: solid 2px #808080;
+    border-right: solid 2px #bababa;
   }
   #salary-output{
     margin-left: 80px;
@@ -161,14 +161,18 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: fit-content;
     background: rgba(240, 240, 240, 0.6);
     backdrop-filter: blur(6px);
     display: none;
     align-items: center;
     justify-content: center;
     z-index: 999;
+
+    overflow-y: auto;  /* Enables vertical scrolling */
+  padding: 20px; 
   }
+  
   
   /* Modal container */
   .modal-content {
@@ -177,6 +181,9 @@ body {
     padding: 30px;
     width: 90%;
     max-width: 600px;
+    margin: auto;
+   /* max-height: 70vh; /* Keeps modal from growing too large */
+   /* overflow-y: auto;*/
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
   }
   
@@ -190,7 +197,7 @@ body {
   .modal-content form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 5px;
   }
   
   .form-row {
@@ -239,8 +246,7 @@ body {
     
     width: 100%;
     height: 4px;
-    color: black;
-    background: black;
+    
     position: absolute;
     pointer-events: none; /* prevent both from dragging simultaneously */
   }
@@ -416,10 +422,119 @@ body {
   
   @media (max-width: 768px) {
     .jobs-container {
+      width: 90%;
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
   }
   
+  @media screen and (max-width: 1424px) {
+  .navbar {
+    max-width: 100%;
+    width: fit-content;
+    height: 25px;
+    padding-left: 1px;
+    padding-right: 1px;
+    display: flex;
+    
+  }
+
+  .nav-links {
+    width: 80%;              /* Reduced width */
+    font-size: 0.9rem;       /* Smaller font size */
+  }
+
+  .nav-links li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-links .create-job {
+    display: block;
+    width: 60%;              /* Slightly narrower button */
+    margin: auto;
+    text-align: center;
+  }
+  .modal-overlay{
+    max-height: 90vh; /* Keeps modal from growing too large */
+    overflow-y: auto;
+  }
+  .filters {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px;
+    gap: 10px;
+    width: 95%;
+    height: fit-content;
+    margin: 10px auto;
+    flex-wrap: wrap; /* optional: to wrap on small screens */
+  }
+  
+  .filters > .search-box,
+  .filters > .dropdown,
+  .filters > .slider {
+    width: 30%; /* reduce width to fit in one line */
+    border-right: none;
+    border-bottom: none;
+    padding-bottom: 0;
+    font-size: 0.9rem;
+  }
+  
+  .search-box {
+    width: 100%;
+    padding-bottom: 0;
+    height: auto;
+    
+  
+  }
+  
+  .search-box input {
+    width: 80%;
+    font-size: 0.9rem;
+    min-width: unset;
+  
+  }
+  
+  .dropdown {
+    width: 100%;
+    height: auto;
+    
+  }
+  
+  .dropdown select {
+    width: 80%;
+    font-size: 0.9rem;
+    min-width: unset;
+    
+  }
+  
+  .slider {
+    width: 100%;
+    padding-bottom: 0;
+  }
+  
+  #salary-output {
+    margin-left: 0;
+    display: block;
+    margin-top: 5px;
+    font-size: 0.9rem;
+  }
+  
+  .slider .range-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .slider input[type="range"] {
+    width: 100%;
+  }
+  .slider{
+    padding-top: 10px;
+    border-top: solid 2px #bababa;
+  }
+}
 
   @media screen and (max-width: 768px) {
     /* Navbar responsive styles */
@@ -444,13 +559,17 @@ body {
       width: 100%;
       text-align: center;
     }
-  
+    .modal-overlay{
+      max-height: 90vh; /* Keeps modal from growing too large */
+      overflow-y: auto;
+    }
     .nav-links .create-job {
       display: block;
       width: 80%;
       margin: 0 auto;
       text-align: center;
     }
+  
   
     /* Filter section responsive styles */
     .filters {
@@ -537,8 +656,9 @@ body {
   .form-actions p{
     color: #00aaff;
   }
-  
+  /* screen deccrease for the form size */
   /* For extra small devices */
+  
   @media screen and (max-width: 480px) {
     .navbar {
       padding: 10px;
