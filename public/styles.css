@@ -532,7 +532,7 @@ body {
   }
   .slider{
     padding-top: 10px;
-    border-top: solid 2px #bababa;
+    border-top: 
   }
 }
 
@@ -565,7 +565,7 @@ body {
     }
     .nav-links .create-job {
       display: block;
-      width: 70%;
+      width: 60%;
       margin: 0 auto;
       text-align: center;
     }
