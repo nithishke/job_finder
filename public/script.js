@@ -206,7 +206,7 @@ function showNotification(message, type) {
               jobCard.innerHTML = `
                 <div class="card-header">
                   <div class="company-logo">
-                    <img src="/assessts/${job.company_name}.png" alt="${job.company_name}" 
+                    <img src="/assessts/${job.company_name.toLowerCase()}.png" alt="${job.company_name}" 
                          onerror="this.onerror=null; this.src='https://placehold.co/600x400/png';">
                   </div>
                   <div class="time-posted">${postedTime}</div>
