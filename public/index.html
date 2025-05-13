@@ -8,7 +8,8 @@
   <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
   <link rel="icon" href="assessts/Frame 54.png">
   <link href="https://fonts.googleapis.com/css2?family=Setoshi:opsz,wght@8..144,400;8..144,600&display=swap" rel="stylesheet">
-  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Setoshi:opsz,wght@8..144,400;8..144,600&display=swap" rel="stylesheet">
 
 </head>
 <body>
@@ -33,7 +34,7 @@
     <section class="filters">
       <div class="search-box">
         <img style="color: black; height: 15px; margin-top: 10px;
-        width: 15px;" src="assessts/Vector (1).png" alt=""><input style="margin-left: 10px;" type="text" placeholder="By Job Title, Role" />
+        width: 15px;" src="assessts/Vector (1).png" alt=""><input id="jobSearchInput" style="margin-left: 10px;" type="text" placeholder="Search By Job Title, Role" />
       </div>
       <div class="dropdown">
         <img style="color: black; width: 15px; height: 18px; margin-top:5px; " src="assessts/Location.png" alt="">
@@ -54,14 +55,15 @@
         </select>
       </div>
       <div class="slider">
-          <label for="salary">Salary Per Month <span id="salary-output">₹50k - ₹70k</span></label>
-          
-          <div class="range-wrapper">
-            <input type="range" id="min-salary" min="50000" onchange="updateSalaryOutput()" max="150000" step="1000" value="50000" />
-            <input type="range" id="max-salary" min="50000" onchange="updateSalaryOutput()" max="150000" step="1000" value="70000" />
-          </div>
-         
+        <label for="salary">Salary Per Month <span id="salary-range-display">₹50k - ₹80k</span></label>
+        
+        <div class="range-wrapper">
+          <div class="slider-track"></div>
+          <div class="slider-track-active" id="slider-track-active"></div>
+          <input type="range" id="min-salary" min="50000" max="150000" step="1000" value="50000" />
+          <input type="range" id="max-salary" min="50000" max="150000" step="1000" value="80000" />
         </div>
+    
   </div>
       
   </section>
@@ -87,7 +89,7 @@
         <div class="form-group">
           <label for="jobLocation">Preferred Location</label>
           <select id="jobLocation" name="Location" required>
-            <option value="" >Choose Preferred Location</option>
+            <option value="" hidden selected >Choose Preferred Location</option>
             <option value="bangalore">Bangalore</option>
             <option value="delhi">Delhi</option>
             <option value="remote">Remote</option>
@@ -96,9 +98,11 @@
         <div class="form-group">
           <label for="jobType">Job Type</label>
           <select id="jobType" name="job_type" required>
+            <option  value="full-time" selected hidden>Full Time</option>
             <option value="full-time">Full Time</option>
             <option value="part-time">Part Time</option>
             <option value="internship">Internship</option>
+            <option value="contract">Contract</option>
           </select>
         </div>
       </div>
@@ -106,15 +110,15 @@
       <div class="form-row">
         <div class="form-group">
           <label for="minSalary">Min Salary (Annual)</label>
-          <input id="minSalary" name="min_salary" type="text" placeholder="₹0" required />
+          <input id="minSalary" name="min_salary" type="text" placeholder="⇅&nbsp;   ₹0" required />
         </div>
         <div class="form-group">
           <label for="maxSalary">Max Salary (Annual)</label>
-          <input id="maxSalary" name="max_salary" type="text" placeholder="₹12,00,000" required />
+          <input id="maxSalary" name="max_salary" type="text" placeholder="⇅&nbsp;   ₹12,00,000" required />
         </div>
         <div class="form-group">
           <label for="deadline">Application Deadline</label>
-          <input id="deadline" name="deadline" type="date" required />
+          <input id="deadline" name="deadline" type="date"  required />
         </div>
       </div>
 

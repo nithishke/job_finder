@@ -1,19 +1,38 @@
-const minSalary = document.getElementById("min-salary");
-const maxSalary = document.getElementById("max-salary");
-const salaryOutput = document.getElementById("salary-output");
+const minSlider = document.getElementById('min-salary');
+    const maxSlider = document.getElementById('max-salary');
+    const rangeDisplay = document.getElementById('salary-range-display');
+    const activeTrack = document.getElementById('slider-track-active');
+    
+    // Format salary value to show in k format (e.g., 50000 -> 50k)
+    function formatSalary(value) {
+      return '₹' + (value / 1000) + 'k';
+    }
+    
+    // Update the display and slider positioning
+    function updateSalaryOutput() {
+      // Ensure min doesn't exceed max
+      if (parseInt(minSlider.value) > parseInt(maxSlider.value)) {
+        minSlider.value = maxSlider.value;
+      }
+      
+      // Update the display text
+      rangeDisplay.textContent = formatSalary(minSlider.value) + ' - ' + formatSalary(maxSlider.value);
+      
+      // Update the active track position
+      const percent1 = ((minSlider.value - minSlider.min) / (minSlider.max - minSlider.min)) * 100;
+      const percent2 = ((maxSlider.value - minSlider.min) / (minSlider.max - minSlider.min)) * 100;
+      activeTrack.style.left = percent1 + '%';
+      activeTrack.style.width = (percent2 - percent1) + '%';
+    }
+    
+    // Set up event listeners
+    minSlider.addEventListener('input', updateSalaryOutput);
+    maxSlider.addEventListener('input', updateSalaryOutput);
+    
+    // Initialize on page load
+    updateSalaryOutput();
 
-function updateSalaryOutput() {
-  let min = parseInt(minSalary.value);
-  let max = parseInt(maxSalary.value);
-  if (min > max) [minSalary.value, maxSalary.value] = [max, min]; // swap
-  salaryOutput.textContent = `₹${Math.round(minSalary.value / 1000)}k - ₹${Math.round(maxSalary.value / 1000)}k`;
 
-
-  minSalary.addEventListener("input", updateSalaryOutput);
-  maxSalary.addEventListener("input", updateSalaryOutput);
-  
-  updateSalaryOutput(); // initial set
-}
        const modal = document.getElementById("modalOverlay");
     const createBtn = document.querySelector(".create-job");
   
@@ -188,15 +207,15 @@ function showNotification(message, type) {
                 <div class="card-header">
                   <div class="company-logo">
                     <img src="/assessts/${job.company_name}.png" alt="${job.company_name}" 
-                         onerror="this.onerror=null; this.src='/assessts/swiggy.png';">
+                         onerror="this.onerror=null; this.src='https://placehold.co/600x400/png';">
                   </div>
                   <div class="time-posted">${postedTime}</div>
                 </div>
                 <div class="job-title">${job.job_title}</div>
                 <div class="job-details">
-                  <span><img style="color:black;" src="assessts/exp.png"/> 1-3 yr Exp</span>
-                  <span><img style="color:black;" src="assessts/jobtype.png"/>  Onsite</span>
-                  <span><img style="color:black;" src="assessts/salary.png"/> 12 LPA</span>
+                  <span><img id="exp" style="color:black;" src="assessts/exp.png"/> 1-3 yr Exp</span>
+                  <span><img id="onsite" style="color:black;" src="assessts/jobtype.png"/>  Onsite</span>
+                  <span><img id="lpa" style="color:black;" src="assessts/salary.png"/> 12 LPA</span>
                 </div>
                 <div class="job-description">
                   <ul>
@@ -225,3 +244,27 @@ function showNotification(message, type) {
         // Initialize job listing
         fetchAndDisplayJobs();
       });
+
+
+      // search box
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const searchInput = document.getElementById("jobSearchInput");
+      
+        searchInput.addEventListener("input", () => {
+          const query = searchInput.value.trim().toLowerCase();
+          const jobCards = document.querySelectorAll("#jobsContainer .job-card");
+      
+          jobCards.forEach(card => {
+            const title = card.querySelector(".job-title").textContent.toLowerCase();
+            
+            // Show only if title STARTS WITH the query
+            if (title.startsWith(query)) {
+              card.style.display = "block";
+            } else {
+              card.style.display = "none";
+            }
+          });
+        });
+      });
+      

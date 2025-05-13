@@ -1,16 +1,16 @@
+@import url(assessts/satoshi.css);
 body {
     margin: 0;
-    font-family: "Segoe UI", sans-serif;
+    font-family: 'satoshi',sans-serif;
     background: #fafafa;
   }
   
-    * {
-      font-family: 'Setoshi', sans-serif;
-    }
+
     
   .top{
     border: none;
     background-color: #ffffff;
+    margin-top: 0%;
   }
   .form-row {
     display: flex;
@@ -56,13 +56,15 @@ body {
     list-style: none;
     display: flex;
     gap: 25px;
+    font-weight: 600;
     align-items: center;
   }
   
   .nav-links a {
     text-decoration: none;
     color: #333;
-    font-weight: 500;
+    font-weight: 600;
+    
   }
   
   .nav-links .create-job {
@@ -102,13 +104,13 @@ body {
     min-width: 300px;
     border: none;
     width: fit-content;
-   border-right: solid 2px #bababa;
+   border-right: solid 2px #fafafa;
   }
   .search-box{
     display: flex;
     flex-direction: row;
     height: fit-content;
-    border-right: solid 2px #bababa;
+    border-right: solid 2px #fafafa;
   }
   #salary-output{
     margin-left: 80px;
@@ -128,7 +130,7 @@ body {
     
   }
   .dropdown{
-    border-right:solid 2px #bababa;
+    border-right:solid 2px #fafafa;
     width: 60px;
     height: 40px;
     justify-items: center;
@@ -242,41 +244,116 @@ body {
     color: white;
   }
   /* Range Slider */
-  .range-wrapper input[type="range"] {
-    
-    width: 100%;
-    height: 4px;
-    
-    position: absolute;
-    pointer-events: none; /* prevent both from dragging simultaneously */
-  }
-  
   .range-wrapper {
     position: relative;
     height: 20px;
-    margin-top: 5px;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+  }
+
+  #salary-range-display{
+    margin-left: 70px;
   }
   
+  .slider-track {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 2px;
+    width: 100%;
+    background-color: #e0e0e0;
+  }
+  
+  .slider-track-active {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 2px;
+    background-color: #000;
+  }
+  
+  /* Base styling for range inputs */
+  input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    background: transparent;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    margin: 0;
+  }
+  
+  /* WebKit Thumb */
   input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    height: 14px;
-    width: 14px;
-    background: black;
+    height: 16px;
+    width: 16px;
+    background-color: white;
+    border: 4px solid black;
     border-radius: 50%;
     cursor: pointer;
     pointer-events: all;
     position: relative;
+    z-index: 2;
+    margin-top: -7px;
   }
   
+  /* Mozilla Thumb */
   input[type="range"]::-moz-range-thumb {
-    height: 14px;
-    width: 14px;
-    background: black;
+    height: 16px;
+    width: 16px;
+    background-color: white;
+    border: 4px solid black;
     border-radius: 50%;
     cursor: pointer;
     pointer-events: all;
+    position: relative;
+    z-index: 2;
   }
   
+  /* Optional: Track styling for WebKit */
+  input[type="range"]::-webkit-slider-runnable-track {
+    height: 2px;
+    background: transparent;
+    border-radius: 1px;
+  }
+  
+  /* Optional: Track styling for Firefox */
+  input[type="range"]::-moz-range-track {
+    height: 2px;
+    background: transparent;
+    border-radius: 1px;
+  }
+  
+  .value-indicator {
+    display: inline-block;
+    background-color: #1a8eff;
+    color: white;
+    padding: 3px 5px;
+    border-radius: 3px;
+    position: absolute;
+    top: -30px;
+    transform: translateX(-50%);
+    font-size: 12px;
+  }
+  
+  .min-value {
+    left: 0;
+    transform: translateX(0);
+  }
+  
+  .max-value {
+    right: 0;
+    transform: translateX(0);
+  }
+  
+  .range-values {
+    margin-top: 10px;
+    height: 20px;
+    position: relative;
+  }
 
   .jobs-section {
     max-width: 1200px;
@@ -293,16 +370,20 @@ body {
   
   .jobs-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    
     gap: 20px;
   }
   
   .job-card {
-    background: white;
+    background: #ffffff;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     padding: 16px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    max-width: 316px;
+    max-height: 360px;
+    font-weight: 500;
   }
   
   .job-card:hover {
@@ -333,7 +414,7 @@ body {
     width: 80%;
     height: 80%;
     object-fit: contain;
-    background-color: #F7881F;
+    background-color: #FFFFFF;
     border-radius: 50%;
   }
   
@@ -344,11 +425,12 @@ body {
     padding: 4px 8px;
     border-radius: 7px;
     background-color: #B0D9FF;
+    font-weight: 500;
   }
   
   .job-title {
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 700;
     
     margin-bottom: 12px;
     color: #333;
@@ -359,18 +441,22 @@ body {
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-evenly;
-    gap: 8px;
+    
     margin-bottom: 12px;
+    
   }
   
   .job-details span {
-    font-size: 13px;
+    font-size: 14px;
     color: #5a5a5a;
     width: fit-content;
     padding: 4px 4px;
     border-radius: 4px;
+    font-weight: 500;
     align-items: center;
+   
   }
+
   
   .job-description ul {
     margin: 0;
@@ -381,8 +467,8 @@ body {
   
   .job-description li {
     position: relative;
-    font-size: 13px;
-    color: #555;
+    font-size: 14px;
+    color: #555555;
     padding-left: 8px;
     margin-bottom: 6px;
   }
@@ -391,7 +477,7 @@ body {
     content: "•";
     position: absolute;
     left: -10px;
-    color: #0088cc;
+    color: #555555;
   }
   
   .apply-btn {
@@ -403,7 +489,7 @@ body {
     padding: 8px 0;
     border-radius: 4px;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
     margin-top: 12px;
     transition: background-color 0.2s;
   }
@@ -420,11 +506,11 @@ body {
     font-size: 14px;
   }
   
-  @media (max-width: 768px) {
-    .jobs-container {
-      width: 90%;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    }
+  #maxSalary,#minSalary{
+    width: 125px ;
+  }
+  #deadline{
+    width: 250px;
   }
   
   @media screen and (max-width: 1424px) {
@@ -533,6 +619,9 @@ body {
   .slider{
     padding-top: 10px;
     
+  }
+  .job-card{
+    font-size: 1rem;
   }
 }
 
@@ -647,7 +736,7 @@ body {
     }
   
     .job-card {
-      width: 100%;
+      width: 90%;
       max-width: 100%;
       background-color: #FFFFFF;
       font-size: 0.9rem;
@@ -698,3 +787,13 @@ body {
       min-height: 44px; /* Apple's recommended minimum touch target size */
     }
   }
+
+  #jobDescription{
+    font-family: 'setosha', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+  }
+.form-group input{
+  font-weight: 500;
+  font-size: 15px;
+}
