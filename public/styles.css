@@ -250,12 +250,24 @@ body {
     margin-top: 8px;
     display: flex;
     align-items: center;
+    width: 100%;
   }
 
   #salary-range-display{
     margin-left: 70px;
   }
-  
+  .slider-track {
+  z-index: 1;
+}
+
+.slider-track-active {
+  z-index: 2;
+}
+
+input[type="range"] {
+  z-index: 3;
+}
+
   .slider-track {
     position: absolute;
     top: 50%;
@@ -282,6 +294,7 @@ body {
     position: absolute;
     top: 0;
     height: 100%;
+    z-index: 3;
     margin: 0;
   }
   
@@ -296,7 +309,7 @@ body {
     cursor: pointer;
     pointer-events: all;
     position: relative;
-    z-index: 2;
+    z-index: 1;
     margin-top: -7px;
   }
   
@@ -408,6 +421,9 @@ body {
     align-items: center;
     overflow: hidden;
     border: 1px solid #eee;
+  }
+  #min-salary,#max-salary{
+    width: 100%;
   }
   
   .company-logo img {
