@@ -76,8 +76,17 @@ app.get('/api/jobs', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
+app.get('/api/jobs/:id', async (req,res) => {
+  try {
+    const {data, error } = await supabase.from('jobs').select('*').eq('company_name', req.params.id);
+    if(error) throw error;
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+
