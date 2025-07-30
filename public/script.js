@@ -248,102 +248,141 @@ function showNotification(message, type) {
       });
 
 
-      // search box
+//       // search box
 
-      document.addEventListener("DOMContentLoaded", () => {
-        const searchInput = document.getElementById("jobSearchInput");
+//       document.addEventListener("DOMContentLoaded", () => {
+//         const searchInput = document.getElementById("jobSearchInput");
       
-        searchInput.addEventListener("input", () => {
-          const query = searchInput.value.trim().toLowerCase();
-          const jobCards = document.querySelectorAll("#jobsContainer .job-card");
+//         searchInput.addEventListener("input", () => {
+//           const query = searchInput.value.trim().toLowerCase();
+//           const jobCards = document.querySelectorAll("#jobsContainer .job-card");
       
-          jobCards.forEach(card => {
-            const title = card.querySelector(".job-title").textContent.toLowerCase();
+//           jobCards.forEach(card => {
+//             const title = card.querySelector(".job-title").textContent.toLowerCase();
             
-            // Show only if title STARTS WITH the query
-            if (title.startsWith(query)) {
-              card.style.display = "block";
-            } else {
-              card.style.display = "none";
-            }
-          });
-        });
-      });
+//             // Show only if title STARTS WITH the query
+//             if (title.startsWith(query)) {
+//               card.style.display = "block";
+//             } else {
+//               card.style.display = "none";
+//             }
+//           });
+//         });
+//       });
       
 
-      // Job location
+//       // Job location
 
 
-document.addEventListener("DOMContentLoaded", () => {
-        const searchInput = document.getElementById("location");
+// document.addEventListener("DOMContentLoaded", () => {
+//         const searchInput = document.getElementById("location");
       
-        searchInput.addEventListener("input", () => {
-          const query = searchInput.value.trim().toLowerCase();
-          const jobCards = document.querySelectorAll("#jobsContainer .job-card");
+//         searchInput.addEventListener("input", () => {
+//           const query = searchInput.value.trim().toLowerCase();
+//           const jobCards = document.querySelectorAll("#jobsContainer .job-card");
       
-          jobCards.forEach(card => {
-            const title = card.querySelector(".job-location").childNodes[1].nodeValue.trim().toLowerCase();
+//           jobCards.forEach(card => {
+//             const title = card.querySelector(".job-location").childNodes[1].nodeValue.trim().toLowerCase();
             
-            // Show only if title STARTS WITH the query
-            if (title.startsWith(query)) {
-              card.style.display = "block";
-            } else {
-              card.style.display = "none";
-            }
-          });
-        });
-      });
+//             // Show only if title STARTS WITH the query
+//             if (title.startsWith(query)) {
+//               card.style.display = "block";
+//             } else {
+//               card.style.display = "none";
+//             }
+//           });
+//         });
+//       });
 
-      // job-type
+//       // job-type
       
 
-      document.addEventListener("DOMContentLoaded", () => {
-        const searchInput = document.getElementById("jobType");
+//       document.addEventListener("DOMContentLoaded", () => {
+//         const searchInput = document.getElementById("jobType");
       
-        searchInput.addEventListener("input", () => {
-          const query = searchInput.value.trim().toLowerCase();
-          const jobCards = document.querySelectorAll("#jobsContainer .job-card");
+//         searchInput.addEventListener("input", () => {
+//           const query = searchInput.value.trim().toLowerCase();
+//           const jobCards = document.querySelectorAll("#jobsContainer .job-card");
       
-          jobCards.forEach(card => {
-            const title = card.querySelector(".job-type").childNodes[1].nodeValue.trim().toLowerCase();
+//           jobCards.forEach(card => {
+//             const title = card.querySelector(".job-type").childNodes[1].nodeValue.trim().toLowerCase();
             
-            // Show only if title STARTS WITH the query
-            if (title.startsWith(query)) {
-              card.style.display = "block";
-            } else {
-              card.style.display = "none";
-            }
-          });
-        });
-      });
+//             // Show only if title STARTS WITH the query
+//             if (title.startsWith(query)) {
+//               card.style.display = "block";
+//             } else {
+//               card.style.display = "none";
+//             }
+//           });
+//         });
+//       });
 
-      // salary-range
+//       // salary-range
 
-      function filterBySalaryRange() {
+//       function filterBySalaryRange() {
+//   const minSalary = parseInt(document.getElementById("min-salary").value);
+//   const maxSalary = parseInt(document.getElementById("max-salary").value);
+
+//   const cards = document.querySelectorAll("#jobsContainer .job-card");
+
+
+//   cards.forEach(card => {
+//     const salaryText = card.querySelector(".job-salary").childNodes[1].nodeValue.trim();
+//     const salaryMatch = salaryText.match(/\d+/g); // Extract numbers from text
+
+//     if (salaryMatch) {
+//       const salary = parseFloat(salaryMatch[0]); // Assume single number or min value
+//        const monthlySalary = Math.floor((salary * 100000) / 12);
+
+//       if (monthlySalary >= minSalary && monthlySalary <= maxSalary) {
+//         card.style.display = "block";
+//       } else {
+//         card.style.display = "none";
+//       }
+//     } else {
+//       card.style.display = "none"; // Hide if salary not found
+//     }
+//   });
+// }
+
+// document.getElementById("min-salary").addEventListener("input", filterBySalaryRange);
+// document.getElementById("max-salary").addEventListener("input", filterBySalaryRange);
+
+function applyFilters() {
+  const titleQuery = document.getElementById("jobSearchInput").value.trim().toLowerCase();
+  const locationQuery = document.getElementById("location")?.value.trim().toLowerCase() || "";
+  const jobTypeQuery = document.getElementById("jobType")?.value.trim().toLowerCase() || "";
   const minSalary = parseInt(document.getElementById("min-salary").value);
   const maxSalary = parseInt(document.getElementById("max-salary").value);
 
   const cards = document.querySelectorAll("#jobsContainer .job-card");
 
-
   cards.forEach(card => {
-    const salaryText = card.querySelector(".job-salary").childNodes[1].nodeValue.trim();
-    const salaryMatch = salaryText.match(/\d+/g); // Extract numbers from text
+    const title = card.querySelector(".job-title")?.textContent.toLowerCase() || "";
+    const location = card.querySelector(".job-location")?.childNodes[1]?.nodeValue.trim().toLowerCase() || "";
+    const type = card.querySelector(".job-type")?.childNodes[1]?.nodeValue.trim().toLowerCase() || "";
+    const salaryText = card.querySelector(".job-salary")?.textContent.trim() || "";
+    const salaryMatch = salaryText.match(/\d+(\.\d+)?/);
+    const lpa = salaryMatch ? parseFloat(salaryMatch[0]) : 0;
+    const monthlySalary = Math.floor((lpa * 100000) / 12);
 
-    if (salaryMatch) {
-      const salary = parseFloat(salaryMatch[0]); // Assume single number or min value
-       const monthlySalary = Math.floor((salary * 100000) / 12);
+    const matchesTitle = title.startsWith(titleQuery);
+    const matchesLocation = locationQuery === "" || location === locationQuery;
+    const matchesJobType = jobTypeQuery === "" || type === jobTypeQuery;
+    const matchesSalary = monthlySalary >= minSalary && monthlySalary <= maxSalary;
 
-      if (monthlySalary >= minSalary && monthlySalary <= maxSalary) {
-        card.style.display = "block";
-      } else {
-        card.style.display = "none";
-      }
+    if (matchesTitle && matchesLocation && matchesJobType && matchesSalary) {
+      card.style.display = "block";
     } else {
-      card.style.display = "none"; // Hide if salary not found
+      card.style.display = "none";
     }
   });
 }
 
-document.getElementById("min-salary").addEventListener("input", filterBySalaryRange);
-document.getElementById("max-salary").addEventListener("input", filterBySalaryRange);
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("jobSearchInput").addEventListener("input", applyFilters);
+  document.getElementById("location").addEventListener("change", applyFilters);
+  document.getElementById("jobType").addEventListener("change", applyFilters);
+  document.getElementById("min-salary").addEventListener("input", applyFilters);
+  document.getElementById("max-salary").addEventListener("input", applyFilters);
+});
