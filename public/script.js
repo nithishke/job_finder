@@ -199,7 +199,7 @@ function showNotification(message, type) {
               const jobCard = document.createElement('div');
               jobCard.className = 'job-card';
 
-              const maxSalary = job.max_salary;
+              const maxSalary = (job.max_salary*12)/100000;
               
               // Format timestamp
               const postedTime = timeAgo(job.created_at);
@@ -331,9 +331,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const salaryMatch = salaryText.match(/\d+/g); // Extract numbers from text
 
     if (salaryMatch) {
-      const salary = parseInt(salaryMatch[0]); // Assume single number or min value
+      const salary = parseFloat(salaryMatch[0]); // Assume single number or min value
+       const monthlySalary = Math.floor((salary * 100000) / 12);
 
-      if (salary >= minSalary && salary <= maxSalary) {
+      if (monthlySalary >= minSalary && monthlySalary <= maxSalary) {
         card.style.display = "block";
       } else {
         card.style.display = "none";
