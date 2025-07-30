@@ -54,15 +54,22 @@ document.getElementById('jobForm').addEventListener('submit', async function (e)
     e.preventDefault(); // Prevent default form submission
   
     const jobData = {
-      job_title: document.getElementById('jobTitle').value,
-      company_name: document.getElementById('companyName').value,
-      location: document.getElementById('jobLocation').value,
-      job_type: document.getElementById('jobType').value,
-      min_salary: document.getElementById('minSalary').value,
-      max_salary: document.getElementById('maxSalary').value,
-      deadline: document.getElementById('deadline').value,
-      description: document.getElementById('jobDescription').value,
+      job_title: document.getElementById('jobTitle').value.trim(),
+      company_name: document.getElementById('companyName').value.trim(),
+      location: document.getElementById('jobLocation').value.trim(),
+      job_type: document.getElementById('jobTypeSelect').value.trim(),
+      min_salary: document.getElementById('minSalary').value.trim(),
+      max_salary: document.getElementById('maxSalary').value.trim(),
+      deadline: document.getElementById('deadline').value.trim(),
+      description: document.getElementById('jobDescription').value.trim(),
     };
+    for (const [key, value] of Object.entries(jobData)) {
+  if (!value) {
+    showNotification(`❌ Please fill out the ${key.replace(/_/g, ' ')} field.`, 'error');
+    return;
+  }
+}
+
   
     try {
       const response = await fetch('/submit-job', {
