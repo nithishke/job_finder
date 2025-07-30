@@ -410,6 +410,12 @@ input[type="range"] {
     align-items: center;
     margin-bottom: 12px;
   }
+
+  .job-location,.job-type,.job-salary{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+  }
   
   .company-logo {
     width: 48px;

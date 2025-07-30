@@ -198,6 +198,8 @@ function showNotification(message, type) {
               // Create card element
               const jobCard = document.createElement('div');
               jobCard.className = 'job-card';
+
+              const maxSalary = job.max_salary;
               
               // Format timestamp
               const postedTime = timeAgo(job.created_at);
@@ -213,9 +215,9 @@ function showNotification(message, type) {
                 </div>
                 <div class="job-title">${job.job_title}</div>
                 <div class="job-details">
-                  <span><img id="exp" style="color:black;" src="assessts/exp.png"/> 1-3 yr Exp</span>
-                  <span><img id="onsite" style="color:black;" src="assessts/jobtype.png"/>  Onsite</span>
-                  <span><img id="lpa" style="color:black;" src="assessts/salary.png"/> 12 LPA</span>
+                  <span class="job-type"><img id="exp" style="color:black;" src="assessts/exp.png"/> ${job.job_type.toUpperCase()}</span>
+                  <span class="job-location"><img id="onsite" style="color:black;" src="assessts/jobtype.png"/>  ${job.location.toUpperCase()}</span>
+                  <span class="job-salary"><img id="lpa" style="color:black;" src="assessts/salary.png"/> ${maxSalary} LPA</span>
                 </div>
                 <div class="job-description">
                   <ul>
@@ -268,3 +270,79 @@ function showNotification(message, type) {
         });
       });
       
+
+      // Job location
+
+
+document.addEventListener("DOMContentLoaded", () => {
+        const searchInput = document.getElementById("location");
+      
+        searchInput.addEventListener("input", () => {
+          const query = searchInput.value.trim().toLowerCase();
+          const jobCards = document.querySelectorAll("#jobsContainer .job-card");
+      
+          jobCards.forEach(card => {
+            const title = card.querySelector(".job-location").childNodes[1].nodeValue.trim().toLowerCase();
+            
+            // Show only if title STARTS WITH the query
+            if (title.startsWith(query)) {
+              card.style.display = "block";
+            } else {
+              card.style.display = "none";
+            }
+          });
+        });
+      });
+
+      // job-type
+      
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const searchInput = document.getElementById("jobType");
+      
+        searchInput.addEventListener("input", () => {
+          const query = searchInput.value.trim().toLowerCase();
+          const jobCards = document.querySelectorAll("#jobsContainer .job-card");
+      
+          jobCards.forEach(card => {
+            const title = card.querySelector(".job-type").childNodes[1].nodeValue.trim().toLowerCase();
+            
+            // Show only if title STARTS WITH the query
+            if (title.startsWith(query)) {
+              card.style.display = "block";
+            } else {
+              card.style.display = "none";
+            }
+          });
+        });
+      });
+
+      // salary-range
+
+      function filterBySalaryRange() {
+  const minSalary = parseInt(document.getElementById("min-salary").value);
+  const maxSalary = parseInt(document.getElementById("max-salary").value);
+
+  const cards = document.querySelectorAll("#jobsContainer .job-card");
+
+
+  cards.forEach(card => {
+    const salaryText = card.querySelector(".job-salary").childNodes[1].nodeValue.trim();
+    const salaryMatch = salaryText.match(/\d+/g); // Extract numbers from text
+
+    if (salaryMatch) {
+      const salary = parseInt(salaryMatch[0]); // Assume single number or min value
+
+      if (salary >= minSalary && salary <= maxSalary) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    } else {
+      card.style.display = "none"; // Hide if salary not found
+    }
+  });
+}
+
+document.getElementById("min-salary").addEventListener("input", filterBySalaryRange);
+document.getElementById("max-salary").addEventListener("input", filterBySalaryRange);

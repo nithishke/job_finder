@@ -9,8 +9,8 @@ const port = 3000;
 
 // Initialize Supabase client
 const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL, 
-  process.env.NEXT_PUBLIC_SUPABASE_KEY
+  process.env.SUPABASE_URL, 
+  process.env.SUPABASE_KEY
 );
 // Middleware
 app.use(bodyParser.json());
